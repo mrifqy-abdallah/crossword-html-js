@@ -7,17 +7,17 @@ window.onload = function () {
     /**
      * Define your crossword here. 
      * 
-     * Fill the array with strings which consist of dash (-), small letter ([a-z]),
-     * and uppercase letter ([A-Z]).
+     * Fill the array with strings which consist of dash (-), lowercase 
+     * letter ([a-z]), and uppercase letter ([A-Z]).
      * 
      * Each index of the array represents a row, and each character inside it 
      * represents a column. All rows must have the same amount of columns or the
      * grid css will mess up the crossword board.
      * 
      * - Use dash (-) to represent a blank column.
-     * - Use small letter to represents an active and fillable column.
-     *   The letter itself should represent the true value of the column.
      * - Use uppercase letter to represent a read-only active column.
+     * - Use lowercase letter to represents an active and fillable column.
+     *   The letter itself should represent the true value of the column.
      * 
      */
     var crossword = [];
@@ -35,7 +35,7 @@ window.onload = function () {
 
             if (char == '-') {
                 let span = document.createElement("span");
-                span.setAttribute("id", id);
+                span.id = id;
                 span.className = "crossword-board__item--blank";
                 crossword_rows.appendChild(span);
             } else {

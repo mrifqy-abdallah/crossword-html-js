@@ -28,7 +28,7 @@ window.onload = function () {
 
             if (char == '-') {
                 let span = document.createElement("span");
-                span.setAttribute("id", id);
+                span.id = id;
                 span.className = "crossword-board__item--blank";
                 crossword_rows.appendChild(span);
             } else {

@@ -237,35 +237,13 @@ function setupCrossword() {
     var crossword_items = document.querySelectorAll(".crossword-board__item:read-write");
     var crossword_items_length = crossword_items.length;
 
-    function countFilledItems() {
-        let filled_items = Array.from(crossword_items).filter(item => Boolean(item.value)).length;
-
-        if (filled_items < crossword_items_length) {
-            console.log('Some inputs are still empty..');
-        } else {
-            console.log('All inputs are filled!');
-            countTrueAnswer();
-        }
-    }
-
-    function countTrueAnswer() {
-        let true_answers = Array.from(crossword_items).filter(
-            item => item.value.toLowerCase() === String.fromCharCode(parseInt(item.dataset.pos) + 97)
-        ).length;
-
-        if (true_answers == crossword_items_length) {
-            alert('Your have filled all the crosswords correctly!');
-        } else {
-            alert('Some of your answer is incorrect..');
-        }
-    }
-
     for (let i = 0; i < crossword_items_length; i++) {
         crossword_items[i].addEventListener("click", clickHandler);
         crossword_items[i].addEventListener("input", inputHandler);
         crossword_items[i].addEventListener("focus", focusHandler);
         crossword_items[i].addEventListener("blur", blurHandler);
         crossword_items[i].addEventListener("keydown", keydownHandler);
+        crossword_items[i].addEventListener("keyup", keyupHandler);
     }
 
     function clickHandler(evt) {
@@ -307,7 +285,6 @@ function setupCrossword() {
                 document.getElementById(evt.target.dataset.nextY).focus();
             }
         }
-        countFilledItems();
     }
 
     function focusHandler(evt) {
@@ -355,7 +332,7 @@ function setupCrossword() {
 
             case "Down":
             case "ArrowDown":
-                let destination = evt.target.dataset.nextY || evt.target.dataset.jumpNextY;
+                var destination = evt.target.dataset.nextY || evt.target.dataset.jumpNextY;
                 if (destination) {
                     proceedClickHandler(destination);
                     document.getElementById(destination).focus();
@@ -364,7 +341,7 @@ function setupCrossword() {
 
             case "Up":
             case "ArrowUp":
-                let destination = evt.target.dataset.prevY || evt.target.dataset.jumpPrevY;
+                var destination = evt.target.dataset.prevY || evt.target.dataset.jumpPrevY;
                 if (destination) {
                     proceedClickHandler(destination);
                     document.getElementById(destination).focus();
@@ -373,7 +350,7 @@ function setupCrossword() {
 
             case "Left":
             case "ArrowLeft":
-                let destination = evt.target.dataset.prevX || evt.target.dataset.jumpPrevX;
+                var destination = evt.target.dataset.prevX || evt.target.dataset.jumpPrevX;
                 if (destination) {
                     proceedClickHandler(destination);
                     document.getElementById(destination).focus();
@@ -382,7 +359,7 @@ function setupCrossword() {
 
             case "Right":
             case "ArrowRight":
-                let destination = evt.target.dataset.nextX || evt.target.dataset.jumpNextX;
+                var destination = evt.target.dataset.nextX || evt.target.dataset.jumpNextX;
                 if (destination) {
                     proceedClickHandler(destination);
                     document.getElementById(destination).focus();
@@ -394,5 +371,25 @@ function setupCrossword() {
         }
 
         evt.preventDefault();
+    }
+
+    function keyupHandler(evt) {
+        let filled_items = Array.from(crossword_items).filter(item => Boolean(item.value)).length;
+
+        if (filled_items < crossword_items_length) {
+            console.log('Some inputs are still empty..');
+        } else {
+            console.log('All inputs are filled!');
+
+            let true_answers = Array.from(crossword_items).filter(
+                item => item.value.toLowerCase() === String.fromCharCode(parseInt(item.dataset.pos) + 97)
+            ).length;
+
+            if (true_answers == crossword_items_length) {
+                alert('Your have filled all the crosswords correctly!');
+            } else {
+                alert('Some of your answer is incorrect..');
+            }
+        }
     }
 }

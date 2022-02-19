@@ -54,3 +54,4 @@ While a lowercase will have:
    - focus.
    - blur.
    - keydown, which makes nagivate using arrows possible and handle move focus while deleting.
+   - keyup, which checks whether the inputs are all filled, and whether all the inputs is correct or not.

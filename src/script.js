@@ -269,16 +269,21 @@ function setupCrossword() {
     }
 
     function clickHandler(evt) {
-        let target_is_accros = evt.target.dataset.isAcross;
-        let target_is_down = evt.target.dataset.isDown;
+        proceedClickHandler(evt.target.id);
+    }
+
+    function proceedClickHandler(id) {
+        let e = document.getElementById(id);
+        let target_is_accros = e.dataset.isAcross;
+        let target_is_down = e.dataset.isDown;
 
         if (target_is_accros && target_is_down) {
-            if (!evt.target.isClicked) {
+            if (!e.dataset.isClicked) {
                 current_flow = ACROSS;
-                evt.target.isClicked = '1';
+                e.dataset.isClicked = '1';
             } else {
                 current_flow = DOWN;
-                evt.target.isClicked = '';
+                e.dataset.isClicked = '';
             }
         } else if (target_is_accros) {
             current_flow = ACROSS;
@@ -350,33 +355,37 @@ function setupCrossword() {
 
             case "Down":
             case "ArrowDown":
-                if (evt.target.dataset.nextY || evt.target.dataset.jumpNextY) {
-                    clickHandler(evt);
-                    document.getElementById(evt.target.dataset.nextY || evt.target.dataset.jumpNextY).focus();
+                let destination = evt.target.dataset.nextY || evt.target.dataset.jumpNextY;
+                if (destination) {
+                    proceedClickHandler(destination);
+                    document.getElementById(destination).focus();
                 }
                 break;
 
             case "Up":
             case "ArrowUp":
-                if (evt.target.dataset.prevY || evt.target.dataset.jumpPrevY) {
-                    clickHandler(evt);
-                    document.getElementById(evt.target.dataset.prevY || evt.target.dataset.jumpPrevY).focus();
+                let destination = evt.target.dataset.prevY || evt.target.dataset.jumpPrevY;
+                if (destination) {
+                    proceedClickHandler(destination);
+                    document.getElementById(destination).focus();
                 }
                 break;
 
             case "Left":
             case "ArrowLeft":
-                if (evt.target.dataset.prevX || evt.target.dataset.jumpPrevX) {
-                    clickHandler(evt);
-                    document.getElementById(evt.target.dataset.prevX || evt.target.dataset.jumpPrevX).focus();
+                let destination = evt.target.dataset.prevX || evt.target.dataset.jumpPrevX;
+                if (destination) {
+                    proceedClickHandler(destination);
+                    document.getElementById(destination).focus();
                 }
                 break;
 
             case "Right":
             case "ArrowRight":
-                if (evt.target.dataset.nextX || evt.target.dataset.jumpNextX) {
-                    clickHandler(evt);
-                    document.getElementById(evt.target.dataset.nextX || evt.target.dataset.jumpNextX).focus();
+                let destination = evt.target.dataset.nextX || evt.target.dataset.jumpNextX;
+                if (destination) {
+                    proceedClickHandler(destination);
+                    document.getElementById(destination).focus();
                 }
                 break;
 

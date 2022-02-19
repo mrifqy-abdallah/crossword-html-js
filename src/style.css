@@ -1,0 +1,59 @@
+.crossword-board-container {
+    position: relative;
+    background: #FFFFFF;
+  }
+  
+  .crossword-board {
+    position: absolute;
+    background: transparent;
+    display: grid;
+    border: none;
+    list-style-type: none;
+    padding: 0;
+    margin: 0 auto;
+    gap: 5px;
+  
+    /********************************/
+    /** CUSTOMIZE START             */
+    /********************************/
+  
+    /* 
+     * Change this to match the width and height of the board
+     */
+    width: 0px;
+    height: 0px;
+  
+    /* 
+     * Change this to match the grid dimensions of the board.
+     * The dimension here should match with the crossword that you 
+     * define at the script.
+    */
+    grid-template: repeat(0, 0%)/repeat(0, 0%);
+  
+    /********************************/
+    /** CUSTOMIZE END               */
+    /********************************/
+  }
+  
+  .crossword-board__item {
+    background: #FFFFFF;
+    position: relative;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    visibility: visible;  
+    border: 3px solid #000000;
+    border-radius: 10px;
+    font-size: 3em;
+  }
+  
+  .crossword-board__item:read-write:active, .crossword-board__item:read-write:focus {
+    background: #FFFF74;
+    outline: 1px solid #000000;
+  }
+  
+  .crossword-board__item--blank {
+    background: transparent;
+    border: none;
+    outline: none;
+  }
